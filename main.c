@@ -50,16 +50,22 @@ void LCD_printChar( char c )
 
 }
 
+void LCD_print( char *str )
+{
+    char i = 0;
+
+    while( *(str+i) != 0 )
+    {
+        LCD_printChar(*(str+i));
+        ++i;    
+    }                    
+}
 
 void main(void)
 {
     LCD_init();
     LCD_on();
-    LCD_printChar(0x53);
-    LCD_printChar(0x45);
-    LCD_printChar(0x4E);
-    LCD_printChar(0x41);
-    LCD_printChar(0x49);
+    LCD_print("SENAI");
         
     while( 1 )
     {
