@@ -20,6 +20,10 @@
 
 
 
+
+
+
+
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -2522,47 +2526,45 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.00\\pic\\include\\xc.h" 2 3
 # 10 "main.c" 2
 # 20 "main.c"
-void LCD_init( void )
+void LCD_init (void)
 {
-    TRISDbits.TRISD7 = 0;
     TRISDbits.TRISD6 = 0;
+    TRISDbits.TRISD7 = 0;
     ANSELH = 0;
     TRISB = 0x00;
 
-    PORTB = 0x00;
+    PORTB = 0X00;
     PORTDbits.RD7 = 1;
     PORTDbits.RD6 = 0;
 }
 
-void LCD_on( void )
+void LCD_on (void)
 {
     PORTDbits.RD6 = 0;
     PORTDbits.RD7 = 1;
     PORTB = 0x0F;
-    PORTDbits.RD7 = 1;
+    PORTDbits.RD7 = 0;
     _delay((unsigned long)((40)*(4000000/4000000.0)));
     PORTDbits.RD7 = 1;
-
 }
 
-void LCD_printChar( char c )
+void LCD_printChar (char c)
 {
-    PORTDbits.RD6 = 1;;
+    PORTDbits.RD6 = 1;
     PORTB = c;
     PORTDbits.RD7 = 0;
     _delay((unsigned long)((40)*(4000000/4000000.0)));
     PORTDbits.RD7 = 1;
-
 }
 
-void LCD_print( char *str )
+void LCD_print ( char * str)
 {
     char i = 0;
 
     while( *(str+i) != 0 )
     {
-        LCD_printChar(*(str+i));
-        ++i;
+        LCD_printChar( *(str+i) );
+        i++;
     }
 }
 
@@ -2572,12 +2574,8 @@ void main(void)
     LCD_on();
     LCD_print("SENAI");
 
-    while( 1 )
+    while(1)
     {
 
-
     }
-
-
-
 }
